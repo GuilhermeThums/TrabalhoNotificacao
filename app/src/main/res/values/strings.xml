@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TrabalhoNotificacao</string>
+    <string name="mensagem">Mensagem</string>
+    <string name="titulo">Título</string>
+    <string name="enviar_notifica_o_normal">Enviar notificação normal</string>
+    <string name="enviar_notifica_o">Enviar notificação expansível com quebra de linha</string>
+    <string name="enviar_notifica_o_expans_vel">Enviar notificação expansível</string>
+    <string name="enviar_notifica_o_silenciosa">Enviar notificação silenciosa</string>
+
+</resources>
