@@ -22,6 +22,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="enviarNotificacaoVazia"
+        android:text="@string/enviar_uma_notifica_o_sem_a_o"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="enviarCanal1"
         android:text="@string/enviar_notifica_o_normal" />
 
@@ -54,7 +60,7 @@
         android:id="@+id/respostaNoti"
         android:layout_width="match_parent"
         android:layout_height="34dp"
-        android:text="A RESPOSTA SERA EXIBIDA AQUI"
+        android:text="@string/a_resposta_sera_exibida_aqui"
         android:textAlignment="center"
         android:textSize="14sp" />
 

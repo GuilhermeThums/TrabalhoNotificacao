@@ -31,6 +31,7 @@ import static com.example.trabalhonotificacao.App.CANAL_4_ID;
 import static com.example.trabalhonotificacao.App.CANAL_5_ID;
 
 public class MainActivity extends AppCompatActivity {
+
     private NotificationManagerCompat notificationManager;
 
     private TextView respostaNoti;
@@ -51,6 +52,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void enviarNotificacaoVazia(View v){
+        String titulo = edtTitulo.getText().toString();
+        String mensagem = edtMensagem.getText().toString();
+
+        Notification notificacao = new NotificationCompat.Builder(this, CANAL_1_ID)
+                .setSmallIcon(R.drawable.ic_um)
+                .setContentTitle(titulo)
+                .setContentText(mensagem)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .build();
+
+        notificationManager.notify(6, notificacao);
+    }
+
     public void enviarCanal1(View v){
         String titulo = edtTitulo.getText().toString();
         String mensagem = edtMensagem.getText().toString();
@@ -62,22 +78,19 @@ public class MainActivity extends AppCompatActivity {
         broadcastIntent.putExtra("mensagemToast", mensagem);
         PendingIntent acaoIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        //Declara todos os componentes que fazem parte da notificação
         Notification notificacao = new NotificationCompat.Builder(this, CANAL_1_ID)
                 .setSmallIcon(R.drawable.ic_um)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //Define se a notificação será exibida na tela de bloqueio
                 .setPriority(NotificationCompat.PRIORITY_HIGH)  //Define a prioridade da notificação em APIs inferiores a 26
-
-                //.setOnlyAlertOnce(true)   //Faz com que a notificação só seja disruptiva uma vez
-
-                .setContentIntent(conteudoIntent)
-
-                .addAction(R.mipmap.ic_launcher, "Toast", acaoIntent)
-
-                //.setAutoCancel(true)        //Quando a notificação for selecionada, será liberada da gaveta de notificações
-
+                .setOnlyAlertOnce(true)   //Faz com que a notificação só seja disruptiva uma vez
+                .setContentIntent(conteudoIntent) // Faz com que a notificação responda ao toque e abra a MainActivity
+                .addAction(R.mipmap.ic_launcher, "Toast", acaoIntent) //Adiciona um botão que envia uma mensagem do tipo Toast
+                .setAutoCancel(true)        //Quando a notificação for selecionada, será liberada da gaveta de notificações
                 .build();   //Constrói a notificação
+
         //Emite a notificação que foi construida. O id serve para atualizar a notificação existente sem criar outra notificação
         notificationManager.notify(1, notificacao);
 
@@ -189,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         Notification notificacao = new NotificationCompat.Builder(this, CANAL_5_ID)
-                .setSmallIcon(R.drawable.ic_um)
+                .setSmallIcon(R.drawable.ic_cinco)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //Define se a notificação será exibida na tela de bloqueio

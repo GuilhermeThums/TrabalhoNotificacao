@@ -6,6 +6,8 @@
     <string name="enviar_notifica_o">Enviar notificação expansível com quebra de linha</string>
     <string name="enviar_notifica_o_expans_vel">Enviar notificação expansível</string>
     <string name="enviar_notifica_o_silenciosa">Enviar notificação silenciosa</string>
-    <string name="enviar_notificao_resposta">Enviar com resposta</string>
+    <string name="enviar_notificao_resposta">Enviar notificação com ação de resposta</string>
+    <string name="a_resposta_sera_exibida_aqui">A RESPOSTA SERA EXIBIDA AQUI</string>
+    <string name="enviar_uma_notifica_o_sem_a_o">Enviar uma notificação sem ação</string>
 
 </resources>
