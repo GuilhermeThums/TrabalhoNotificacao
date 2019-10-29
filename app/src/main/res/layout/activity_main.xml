@@ -43,4 +43,19 @@
         android:onClick="enviarCanal4"
         android:text="@string/enviar_notifica_o" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="enviarCanal5"
+        android:text="@string/enviar_notificao_resposta" />
+
+    <TextView
+        android:id="@+id/respostaNoti"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="A RESPOSTA SERA EXIBIDA AQUI"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
 </LinearLayout>

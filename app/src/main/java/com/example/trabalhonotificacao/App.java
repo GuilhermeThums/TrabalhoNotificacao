@@ -17,6 +17,7 @@ public class App extends Application {
     public static final String CANAL_2_ID = "canal_2";
     public static final String CANAL_3_ID = "canal_3";
     public static final String CANAL_4_ID = "canal_4";
+    public static final String CANAL_5_ID = "canal_4";
 
     @Override
     public void onCreate() {
@@ -38,6 +39,8 @@ public class App extends Application {
             canal3.setDescription("Esse é o canal 3 de notificação");
             NotificationChannel canal4 = new NotificationChannel(CANAL_4_ID, "Canal 4", NotificationManager.IMPORTANCE_MIN);
             canal4.setDescription("Esse é o canal 4 de notificação");
+            NotificationChannel canal5 = new NotificationChannel(CANAL_5_ID, "Canal 5", NotificationManager.IMPORTANCE_DEFAULT);
+            canal3.setDescription("Esse é o canal 3 de notificação");
 
             //Chamada do gerenciador (manager) para definir de fato o canal de notificação
             NotificationManager manager = getSystemService(NotificationManager.class);
