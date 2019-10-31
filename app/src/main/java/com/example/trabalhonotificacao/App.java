@@ -27,10 +27,7 @@ public class App extends Application {
     int importanciaCanal2 = NotificationManager.IMPORTANCE_HIGH;
     int importanciaCanal3 = NotificationManager.IMPORTANCE_LOW;
     int importanciaCanal4 = NotificationManager.IMPORTANCE_MIN;
-    int importanciaCanal5 = NotificationManager.IMPORTANCE_DEFAULT;
-
-
-
+    int importanciaCanal5 = NotificationManager.IMPORTANCE_HIGH;
 
     @Override
     public void onCreate() {

@@ -55,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
     public void enviarNotificacaoVazia(View v){
         String titulo = edtTitulo.getText().toString();
         String mensagem = edtMensagem.getText().toString();
-
+        //Declara todos os componentes que fazem parte da notificação
         Notification notificacao = new NotificationCompat.Builder(this, CANAL_1_ID)
-                .setSmallIcon(R.drawable.ic_um)
-                .setContentTitle(titulo)
-                .setContentText(mensagem)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .build();
-
-        notificationManager.notify(6, notificacao);
+                .setSmallIcon(R.drawable.ic_um) //Define o ícone pequeno
+                .setContentTitle(titulo)    //Define o título
+                .setContentText(mensagem)   //Define o texto
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)    //Define se a notificação será exibida na tela de bloqueio
+                .setPriority(NotificationCompat.PRIORITY_HIGH)  //Define a prioridade da notificação em APIs inferiores a 26
+                .build();   //Constrói a notificação
+        //Emite a notificação que foi construida. O id serve para atualizar a notificação existente sem criar outra notificação
+        notificationManager.notify(1, notificacao);
     }
 
     public void enviarCanal1(View v){
@@ -74,27 +74,20 @@ public class MainActivity extends AppCompatActivity {
         Intent atividadeIntent = new Intent(this, MainActivity.class);
         PendingIntent conteudoIntent = PendingIntent.getActivity(this, 0, atividadeIntent, 0);
 
-        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
-        broadcastIntent.putExtra("mensagemToast", mensagem);
-        PendingIntent acaoIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //Declara todos os componentes que fazem parte da notificação
         Notification notificacao = new NotificationCompat.Builder(this, CANAL_1_ID)
                 .setSmallIcon(R.drawable.ic_um)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //Define se a notificação será exibida na tela de bloqueio
-                .setPriority(NotificationCompat.PRIORITY_HIGH)  //Define a prioridade da notificação em APIs inferiores a 26
-                .setOnlyAlertOnce(true)   //Faz com que a notificação só seja disruptiva uma vez
-                .setContentIntent(conteudoIntent) // Faz com que a notificação responda ao toque e abra a MainActivity
-                .addAction(R.mipmap.ic_launcher, "Toast", acaoIntent) //Adiciona um botão que envia uma mensagem do tipo Toast
-                .setAutoCancel(true)        //Quando a notificação for selecionada, será liberada da gaveta de notificações
-                .build();   //Constrói a notificação
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setOnlyAlertOnce(true) //Faz com que a notificação só seja disruptiva uma vez
+                .setContentIntent(conteudoIntent)   // Faz com que a notificação responda ao toque e abra a MainActivity
+                .setAutoCancel(true)    //Quando a notificação for selecionada, será liberada da gaveta de notificações
+                .build();
 
-        //Emite a notificação que foi construida. O id serve para atualizar a notificação existente sem criar outra notificação
         notificationManager.notify(1, notificacao);
-
     }
+
     public void enviarCanal2(View v){
         String titulo = edtTitulo.getText().toString();
         String mensagem = edtMensagem.getText().toString();
@@ -106,28 +99,26 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.ic_dois)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
-                .setVisibility(NotificationCompat.VISIBILITY_PRIVATE) //Define se a notificação será exibida na tela de bloqueio
-                .setPriority(NotificationCompat.PRIORITY_LOW)  //Define a prioridade da notificação em APIs inferiores a 26
-
-                //.setContentIntent(conteudoIntent)
-
-                .setColor(Color.BLUE)
-
-                //.setAutoCancel(true)        //Quando a notificação for selecionada, será liberada da gaveta de notificações
+                .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setContentIntent(conteudoIntent)
+                .setColor(Color.BLUE)   //Muda a cor da notificação
+                .setAutoCancel(true)
                 .build();
         notificationManager.notify(2, notificacao);
-
     }
+
     public void enviarCanal3(View v){
         String titulo = edtTitulo.getText().toString();
         String mensagem = edtMensagem.getText().toString();
 
         Intent atividadeIntent = new Intent(this, MainActivity.class);
-        PendingIntent conteudoIntent = PendingIntent.getActivity(this, 0, atividadeIntent, 0);
-
+        PendingIntent conteudoIntent = PendingIntent.getActivity
+                (this, 0, atividadeIntent, 0);
         Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
         broadcastIntent.putExtra("mensagemToast", mensagem);
-        PendingIntent acaoIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent acaoIntent = PendingIntent.getBroadcast
+                (this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Bitmap iconeGrande = BitmapFactory.decodeResource(getResources(), R.drawable.ic_mailicon);
 
@@ -137,22 +128,19 @@ public class MainActivity extends AppCompatActivity {
                 .setContentText(mensagem)
                 .setLargeIcon(iconeGrande)
                 .setLargeIcon(iconeGrande)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(mensagem)
-                        .setBigContentTitle("Título expandido")
-                        .setSummaryText("O texto expandido é:"))  //Em e-mails por exemplo é o endereço de em-ail.
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //Define se a notificação será exibida na tela de bloqueio
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)  //Define a prioridade da notificação em APIs inferiores a 26
-                .setOnlyAlertOnce(true)   //Faz com que a notificação só seja disruptiva uma vez
+                .setStyle(new NotificationCompat.BigTextStyle() //Define o estilo de Notificação Expansível
+                        .bigText(mensagem)  //Define o texto da notificação expandida
+                        .setBigContentTitle("Título expandido") //Define o título da notificação expandida
+                        .setSummaryText("O texto expandido é:")) //Define um texto com qualquer conteúdo
+                .addAction(R.mipmap.ic_launcher, "Toast", acaoIntent)   //Adiciona um botão de ação
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setOnlyAlertOnce(true)
                 .setContentIntent(conteudoIntent)
-                .addAction(R.mipmap.ic_launcher, "Toast", acaoIntent)
-                .setAutoCancel(true)        //Quando a notificação for selecionada, será liberada da gaveta de notificações
+                .setAutoCancel(true)
+                .build();
 
-                .build();   //Constrói a notificação
-        //Emite a notificação que foi construida. O id serve para atualizar a notificação existente sem criar outra notificação
         notificationManager.notify(3, notificacao);
-
-
     }
     public void enviarCanal4(View v){
         String titulo = edtTitulo.getText().toString();
@@ -163,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
                 .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine("Essa é a linha 1")
+                        .addLine(mensagem)
                         .addLine("Essa é a linha 2")
                         .addLine("Essa é a linha 3")
                         .addLine("Essa é a linha 4")
@@ -188,12 +176,10 @@ public class MainActivity extends AppCompatActivity {
         atividadeIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent conteudoIntent = PendingIntent.getActivity(this, randomRequestCode, atividadeIntent, 0);
 
-
-        //Initialise RemoteInput
+        //Inicialização do RemoteInput
         RemoteInput remoteInput = new RemoteInput.Builder(KEY_REPLY)
                 .setLabel(replyLabel)
                 .build();
-
 
         NotificationCompat.Action replyAction = new NotificationCompat.Action.Builder(
                 android.R.drawable.sym_action_chat, "Resposta", conteudoIntent)
@@ -205,20 +191,17 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.ic_cinco)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //Define se a notificação será exibida na tela de bloqueio
-                .setPriority(NotificationCompat.PRIORITY_HIGH)  //Define a prioridade da notificação em APIs inferiores a 26
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
 //                .setContentIntent(conteudoIntent)
                 .addAction(replyAction)
-                .build();   //Constrói a notificação
+                .build();
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("notificationId", 1);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
 
-
-        //Emite a notificação que foi construida. O id serve para atualizar a notificação existente sem criar outra notificação
-        notificationManager.notify(1, notificacao);
-
+        notificationManager.notify(5, notificacao);
     }
 
     @Override
@@ -232,13 +215,11 @@ public class MainActivity extends AppCompatActivity {
             CharSequence charSequence = remoteInput.getCharSequence(
                     KEY_REPLY);
             if (charSequence != null) {
-                //Set the inline reply text in the TextView
-
+                //Coloca a resposta inline no TextView
                 String reply = charSequence.toString();
-
                 respostaNoti.setText("Sua resposta é: " + reply);
                 NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            manager.cancel(1);
+            manager.cancel(5);
             }
         }}
 
